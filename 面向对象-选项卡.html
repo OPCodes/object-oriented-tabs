@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #tab div {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background: red;
+            border: 1px solid #000;
+            display: none;
+        }
+
+        #tab .show {
+            display: block;
+        }
+
+        #tab .bd {
+            background: yellow;
+        }
+    </style>
+    <script>
+        window.onload = function (){
+            var tab = document.getElementById("tab");
+            var Tab = function (tab){
+                this.input = tab.getElementsByTagName("input");
+                this.divs = tab.getElementsByTagName("div");
+                this.len = this.input.length;
+                this.init();
+            }
+            Tab.prototype.init = function (){
+                var _this = this;
+                for( var i = 0; i < this.len; i++ ){
+                    this.input[i].index = i;
+                    this.input[i].onclick = function (){
+                        _this.changeTab(this.index); 
+                    }
+                }
+            }
+            Tab.prototype.changeTab = function (index){
+                for( var i = 0; i < this.len; i++ ){
+                    this.input[i].className = "";
+                    this.divs[i].className = "";
+                }
+                this.input[index].className = "bd";
+                this.divs[index].className = "show";
+            }
+
+            var tab1 = new Tab(tab);
+        }
+
+    </script>
+</head>
+<body>
+    <div id="tab">
+        <input type="button" value="1" class="bd">
+        <input type="button" value="2">
+        <input type="button" value="3">
+        <div class="show">内容一</div>
+        <div>内容二</div>
+        <div>内容三</div>
+    </div>
+</body>
+</html>
+    
